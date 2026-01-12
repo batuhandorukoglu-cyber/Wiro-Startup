@@ -1,0 +1,390 @@
+@import "tailwindcss";
+
+/* 
+  Wiro Startups Design System
+  - Background: Deep Navy/Black (#0B0C15)
+  - Primary Accent: Neon Green (#00FF85)
+  - Secondary/Cards: Dark Gray (#1F2937) with glassmorphism
+  - Font: Inter / System Sans-Serif
+  - Vibe: Developer-centric, Cyberpunk, Clean, High-contrast dark mode
+*/
+
+:root {
+  /* Core Colors */
+  --background: #0B0C15;
+  --foreground: #EDEDED;
+
+  /* Accent Colors */
+  --primary: #00FF85;
+  --primary-glow: rgba(0, 255, 133, 0.4);
+  --primary-muted: #00CC6A;
+
+  /* Card/Surface Colors */
+  --card: rgba(31, 41, 55, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-hover: rgba(31, 41, 55, 0.8);
+
+  /* Text Variants */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+
+  /* Additional */
+  --surface-elevated: rgba(31, 41, 55, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+}
+
+@theme inline {
+  /* Map CSS variables to Tailwind theme */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-glow: var(--primary-glow);
+  --color-primary-muted: var(--primary-muted);
+
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-card-hover: var(--card-hover);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border-subtle: var(--border-subtle);
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background Gradient Effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 133, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0, 255, 133, 0.04), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(0, 255, 133, 0.03), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 255, 133, 0.3);
+  color: #FFFFFF;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Utility Classes */
+.glass-card {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+}
+
+.glass-card-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  background: var(--card-hover);
+  border-color: rgba(0, 255, 133, 0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 133, 0.08);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px var(--primary-glow);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--background);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px var(--primary-glow);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--card-border);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Animation Keyframes */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Form Inputs */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #111827;
+  border: 1px solid var(--card-border);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.form-input:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Stage Selector */
+.stage-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #111827;
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stage-selector:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(17, 24, 39, 0.8);
+}
+
+.stage-selector-active {
+  border-color: var(--primary);
+  background: rgba(0, 255, 133, 0.08);
+  color: var(--primary);
+  box-shadow: 0 0 20px rgba(0, 255, 133, 0.15);
+}
+
+/* Range Slider */
+.range-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #111827;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary-glow);
+  transition: all 0.2s ease;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.range-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.range-slider::-moz-range-track {
+  background: linear-gradient(to right, var(--primary), #111827);
+  border-radius: 4px;
+}
+
+/* Ticker/Marquee Animation */
+.ticker-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.ticker-content {
+  display: flex;
+  animation: ticker-scroll 20s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Fade In Animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Success Checkmark Animation */
+@keyframes success-check {
+  0% {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+
+  100% {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-success-check {
+  animation: success-check 0.6s ease-out 0.2s forwards;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+/* Pulse Price Animation - Slow Glow for Highest Tier */
+@keyframes pulse-price {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(0, 255, 133, 0.5), 0 0 20px rgba(0, 255, 133, 0.3);
+  }
+
+  50% {
+    text-shadow: 0 0 20px rgba(0, 255, 133, 0.8), 0 0 40px rgba(0, 255, 133, 0.5), 0 0 60px rgba(0, 255, 133, 0.3);
+  }
+}
+
+.animate-pulse-price {
+  animation: pulse-price 2s ease-in-out infinite;
+}
+
+/* Float Animation for Rocket */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
